@@ -1,6 +1,4 @@
-Documentation + installation guide for using Raylib with Python: https://electronstudio.github.io/raylib-python-cffi/
-
-## Proposal
+# Proposal
 
 Team members: Jonas Welle, Henry Maddox, Joe C, Charles
 Vision:
@@ -20,3 +18,7 @@ Starting point/initial plans:
 What we will take from GitHub: https://github.com/electronstudio/raylib-python-cffi
 Which is actually bindings for this library: https://www.raylib.com/
 Also we are unlikely to use starting code, except for Raylib itself. Of course, if we do end up using starting code, we will cite it.
+
+# Installation
+
+Documentation + installation guide for using Raylib with Python: https://electronstudio.github.io/raylib-python-cffi/
