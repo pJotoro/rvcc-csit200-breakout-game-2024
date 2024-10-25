@@ -22,3 +22,5 @@ Also we are unlikely to use starting code, except for Raylib itself. Of course, 
 # Installation
 
 Documentation + installation guide for using Raylib with Python: https://electronstudio.github.io/raylib-python-cffi/
+
+If it can't find where 'python3' is, write python instead.
