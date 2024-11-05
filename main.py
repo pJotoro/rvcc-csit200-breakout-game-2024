@@ -1,0 +1,64 @@
+from pyray import *
+
+PLAYER_Y = 420
+PLAYER_WIDTH = 40
+PLAYER_HEIGHT = 10
+PLAYER_SPEED = 8
+
+BALL_SIZE = 50
+BALL_SPEED = 3
+
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 450
+
+def main():
+    init_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Breakout")
+    set_target_fps(60)
+
+    player_pos = 400
+
+    ball_x = SCREEN_WIDTH // 2
+    ball_y = SCREEN_HEIGHT // 2
+    ball_dir_x = 1
+    ball_dir_y = 1
+
+    while not window_should_close():
+        if is_key_pressed(KeyboardKey.KEY_R):
+            # TODO(Jonas): How can we avoid repeating this? Maybe with a class?
+
+            player_pos = 400
+
+            ball_x = SCREEN_WIDTH // 2
+            ball_y = SCREEN_HEIGHT // 2
+            ball_dir_x = 1
+            ball_dir_y = 1
+
+        if is_key_down(KeyboardKey.KEY_LEFT):
+            player_pos -= PLAYER_SPEED
+        if is_key_down(KeyboardKey.KEY_RIGHT):
+            player_pos += PLAYER_SPEED
+
+        ball_x += ball_dir_x * BALL_SPEED
+        ball_y += ball_dir_y * BALL_SPEED
+
+        if check_collision_recs(
+            Rectangle(player_pos, PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT), 
+            Rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE)):
+            ball_dir_y = -1
+        elif ball_y <= 0:
+            ball_dir_y = 1
+
+        if ball_x <= 0:
+            ball_dir_x = 1
+        elif ball_x >= SCREEN_WIDTH - BALL_SIZE:
+            ball_dir_x = -1
+
+        begin_drawing()
+        clear_background(WHITE)
+        draw_rectangle(player_pos, PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT, BLACK)
+        draw_rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE, BLUE)
+        end_drawing()
+    close_window()
+
+if __name__ == "__main__":
+    main()
