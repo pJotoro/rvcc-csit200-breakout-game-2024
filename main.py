@@ -91,6 +91,8 @@ def main():
         clear_background(WHITE)
         draw_rectangle(player_pos, PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT, BLACK)
         draw_rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE, BLUE)
+        for block in blocks:
+            draw_rectangle_rec(block, RED)
         end_drawing()
     close_window()
 
