@@ -66,7 +66,8 @@ def main():
 
     ball_x = SCREEN_WIDTH // 2
     ball_y = SCREEN_HEIGHT // 2
-    ball_dir_x = 1
+    dirs = [-1, 1]
+    ball_dir_x = random.choice(dirs)
     ball_dir_y = 1
     # --------------------------------------
     
@@ -86,7 +87,7 @@ def main():
 
             ball_x = SCREEN_WIDTH // 2
             ball_y = SCREEN_HEIGHT // 2
-            ball_dir_x = 1
+            ball_dir_x = random.choice(dirs)
             ball_dir_y = 1
             blocks.clear()
             for row in range(BLOCK_ROWS):
