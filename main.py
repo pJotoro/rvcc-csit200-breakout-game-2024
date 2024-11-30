@@ -1,4 +1,5 @@
 from pyray import *
+import random
 
 # ----- Constants -----
 PLAYER_Y = 420
@@ -16,7 +17,45 @@ BLOCK_WIDTH = 50
 BLOCK_HEIGHT = 20
 BLOCK_ROWS = 5
 BLOCK_COLUMNS = SCREEN_WIDTH // BLOCK_WIDTH
+
+COLORS = [DARKGRAY,
+          MAROON,
+          ORANGE,
+          DARKGREEN,
+          DARKBLUE,
+          DARKPURPLE,
+          DARKBROWN,
+          GRAY,
+          RED,
+          GOLD,
+          LIME,
+          BLUE,
+          VIOLET,
+          BROWN,
+          LIGHTGRAY,
+          PINK,
+          YELLOW,
+          GREEN,
+          SKYBLUE,
+          PURPLE,
+          BEIGE]
 # ---------------------
+
+
+
+class Block:
+    def __init__(self, x, y, width, height, color):
+        self.__x = x
+        self.__y = y
+        self.__width = width
+        self.__height = height
+        self.__color = color
+
+    def draw(self):
+        draw_rectangle(self.__x, self.__y, self.__width, self.__height, self.__color)
+
+    def get_rectangle(self):
+        return Rectangle(self.__x, self.__y, self.__width, self.__height)
 
 def main():
     init_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Breakout")
@@ -35,9 +74,10 @@ def main():
     blocks = []
     for row in range(BLOCK_ROWS):
         for col in range(BLOCK_COLUMNS):
-            x = col * (BLOCK_WIDTH + 10) + 20
-            y = row * (BLOCK_HEIGHT + 10) + 20
-            blocks.append(Rectangle(x, y, BLOCK_WIDTH, BLOCK_HEIGHT))
+            x = col * (BLOCK_WIDTH)
+            y = row * (BLOCK_HEIGHT)
+            color = random.choice(COLORS)
+            blocks.append(Block(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, color))
     # -----------------------------
 
     while not window_should_close():
@@ -51,9 +91,10 @@ def main():
             blocks.clear()
             for row in range(BLOCK_ROWS):
                 for col in range(BLOCK_COLUMNS):
-                    x = col * (BLOCK_WIDTH + 10) + 20
-                    y = row * (BLOCK_HEIGHT + 10) + 20
-                    blocks.append(Rectangle(x, y, BLOCK_WIDTH, BLOCK_HEIGHT))
+                    x = col * (BLOCK_WIDTH)
+                    y = row * (BLOCK_HEIGHT)
+                    color = random.choice(COLORS)
+                    blocks.append(Block(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, color))
         
         # Updates the players position
         if is_key_down(KeyboardKey.KEY_LEFT):
@@ -79,12 +120,17 @@ def main():
             ball_dir_x = -1
 
         # if ball hits block
-        for block in blocks[:]:
+        block_idx = 0
+        while block_idx < len(blocks):
+            block = blocks[block_idx]
             if check_collision_recs(
-                Rectangle(block.x, block.y, block.width, block.height), 
+                block.get_rectangle(), 
                 Rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE)):
-                blocks.remove(block)
                 ball_dir_y *= -1
+
+                blocks.pop(block_idx)
+            else:
+                block_idx += 1
 
         begin_drawing()
         clear_background(WHITE)
@@ -92,7 +138,7 @@ def main():
         draw_rectangle(player_pos, PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT, BLACK)
         draw_rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE, BLUE)
         for block in blocks:
-            draw_rectangle_rec(block, RED)
+            block.draw()
 
         end_drawing()
     close_window()
