@@ -42,8 +42,6 @@ def main():
 
     while not window_should_close():
         if is_key_pressed(KeyboardKey.KEY_R):
-            # TODO(Jonas): How can we avoid repeating this? Maybe with a class?
-            # Reset game state if 'R' is pressed
             player_pos = 400
 
             ball_x = SCREEN_WIDTH // 2
@@ -95,7 +93,7 @@ def main():
         draw_rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE, BLUE)
         for block in blocks:
             draw_rectangle_rec(block, RED)
-            
+
         end_drawing()
     close_window()
 
