@@ -45,8 +45,6 @@ POWERUP_SPEED = 3
 POWERUP_EFFECTS = ["widen", "slow_ball", "extra_life"]
 # ---------------------
 
-
-
 class Block:
     def __init__(self, x, y, width, height, color):
         self.__x = x
@@ -54,20 +52,21 @@ class Block:
         self.__width = width
         self.__height = height
         self.__color = color
-        self.__powerup = powerup
+        #self.__powerup = 0
+        #self.__powerup = powerup
 
     def draw(self):
         draw_rectangle(self.__x, self.__y, self.__width, self.__height, self.__color)
 
     def get_rectangle(self):
         return Rectangle(self.__x, self.__y, self.__width, self.__height)
-
+"""
     def has_powerup(self):
               return self.__powerup
 
     def get_powerup(self):
-              return self.__powerup
-class Powerup:
+              return self.__powerup """
+""" class Powerup:
     def __init__(self, x, y, effect):
         self.x = x
         self.y = y
@@ -80,7 +79,7 @@ class Powerup:
         self.y += POWERUP_SPEED
 
     def get_rectangle(self):
-        return Rectangle(self.x - POWERUP_SIZE, self.y - POWERUP_SIZE, POWERUP_SIZE * 2, POWERUP_SIZE * 2)   
+        return Rectangle(self.x - POWERUP_SIZE, self.y - POWERUP_SIZE, POWERUP_SIZE * 2, POWERUP_SIZE * 2)    """
           
 
 def main():
@@ -95,7 +94,7 @@ def main():
     dirs = [-1, 1]
     ball_dir_x = random.choice(dirs)
     ball_dir_y = 1
-    powerups = []
+    #powerups = []
     # --------------------------------------
     
     # ----- Initialize blocks -----
@@ -105,8 +104,9 @@ def main():
             x = col * (BLOCK_WIDTH)
             y = row * (BLOCK_HEIGHT)
             color = random.choice(COLORS)
-            powerup = random.choice(POWERUP_EFFECTS) if random.random() < 0.15 else none
-            blocks.append(Block(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, color, powerup))
+            #powerup = random.choice(POWERUP_EFFECTS) if random.random() < 0.15 else None
+            #blocks.append(Block(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, color, powerup))
+            blocks.append(Block(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, color))
     # -----------------------------
 
     while not window_should_close():
@@ -118,14 +118,15 @@ def main():
             ball_dir_x = random.choice(dirs)
             ball_dir_y = 1
             blocks.clear()
-            powerups.clear()
+            #powerups.clear()
             for row in range(BLOCK_ROWS):
                 for col in range(BLOCK_COLUMNS):
                     x = col * (BLOCK_WIDTH)
                     y = row * (BLOCK_HEIGHT)
                     color = random.choice(COLORS)
-                    powerup = random.choice(POWERUP_EFFECTS) if random.random() < 0.15 else none
-                    blocks.append(Block(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, color, powerup))
+                    #powerup = random.choice(POWERUP_EFFECTS) if random.random() < 0.15 else none
+                    #blocks.append(Block(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, color, powerup))
+                    blocks.append(Block(x, y, BLOCK_WIDTH, BLOCK_HEIGHT, color))
         
         # Updates the players position
         if is_key_down(KeyboardKey.KEY_LEFT):
@@ -157,35 +158,8 @@ def main():
             if check_collision_recs(
                 block.get_rectangle(), 
                 Rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE)):
-                ball_dir_y *= -1
-
-                    if block.has_powerup():
-                              powerup_effect = block.get_powerup()
-                              powerups.append(PowerUp(block.get_rectangle().x + BLOCK_WIDTH // 2, block.get_rectangle().y, powerup_effect))
-
-                    blocks.pop(block_idx)
-          else:
-                    block_idx += 1
-          # draws power ups
-          powerup_idx = 0
-          while powerup_idx < len(powerups):
-                    powerup = powerups[powerup_idx]
-                    powerup.update()
-
-                    if powerup.y > SCREEN_HEIGHT
-                              powerups.pop(powerup_idx)
-                    elif check_collision_recs(
-                              Rectangle(player_pos, PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT),
-                              powerup.get_rectangle()):
-                    if powerup.effect == "widen":
-                              PLAYER_WIDTH =+ 10 # makes the pad wider
-                    elif powerup.effect == "slow_ball":
-                              BALL_SPEED = max(1, BALL_SPEED -1) # makes the ball move slower
-                    elif powerup.effect == "extra_life":
-                              print("You got an extra life!") # gives you an extra life
-                    powerups.pop(powerup_idx)
-                    else:
-                     powerup_idx += 1
+                    ball_dir_y *= -1
+            block_idx += 1
           
 
           
@@ -198,10 +172,10 @@ def main():
         for block in blocks:
             block.draw()
 
-        for powerup in powerups
-              powerup.draw()
+        #for powerup in powerups:
+        #    powerup.draw()
 
-        end_drawing()
+    end_drawing()
     close_window()
 
 if __name__ == "__main__":
