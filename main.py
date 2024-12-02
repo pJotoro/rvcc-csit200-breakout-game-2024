@@ -68,7 +68,7 @@ class Block:
     def get_powerup(self):
               return self.__powerup
 class Powerup:
-        def __init__(self, x, y, effect):
+    def __init__(self, x, y, effect):
         self.x = x
         self.y = y
         self.effect = effect
