@@ -184,7 +184,7 @@ def main():
                     elif powerup.effect == "extra_life":
                               print("You got an extra life!") # gives you an extra life
                     powerups.pop(powerup_idx)
-           else:
+                    else:
                      powerup_idx += 1
           
 
