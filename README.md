@@ -27,3 +27,7 @@ If it can't find where 'python3' is, write python instead.
 
 # Progress Report 2 Google Doc
 https://docs.google.com/document/d/14IHvVsbj3HHQbbQEFEZ6lKa0aG_Joo9zA-EZRMAKZmo/edit?usp=sharing
+
+
+# Google Slides Presentation
+https://docs.google.com/presentation/d/1bCoalxBze737yi7XHqhugNRlnAWPA9jjDbN2f5g2weo/edit?usp=sharing
