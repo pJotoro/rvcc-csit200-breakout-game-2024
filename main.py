@@ -171,6 +171,7 @@ def main():
                 block.draw()
 
         draw_text("Score: " + str(blocks_destroyed), 20, SCREEN_HEIGHT - 40, 30, GREEN)
+        draw_fps(20, SCREEN_HEIGHT - 80)
 
         end_drawing()
     close_window()
