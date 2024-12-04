@@ -111,6 +111,10 @@ def main():
             player_x -= PLAYER_SPEED
         if is_key_down(KeyboardKey.KEY_RIGHT):
             player_x += PLAYER_SPEED
+        if player_x < 0:
+            player_x = 0
+        if player_x > SCREEN_WIDTH - PLAYER_WIDTH:
+            player_x = SCREEN_WIDTH - PLAYER_WIDTH
 
         # ----- Collision -----
 
