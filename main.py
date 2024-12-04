@@ -123,8 +123,7 @@ def main():
         ball_block_y = ball_y // BLOCK_HEIGHT
         if ball_block_x >= 0 and ball_block_x < BLOCK_COLUMNS and ball_block_y >= 0 and ball_block_y < BLOCK_ROWS:
             block = blocks[ball_block_y*BLOCK_COLUMNS + ball_block_x]
-            if block != None and check_collision_recs(block.get_rectangle(), Rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE)):
-                assert(False, "Not supposed to already be overlapping block!")
+            assert(block != None and check_collision_recs(block.get_rectangle(), Rectangle(ball_x, ball_y, BALL_SIZE, BALL_SIZE)), "Not supposed to already be overlapping block!")
 
         # Check blocks vertical
         ball_block_x = ball_x // BLOCK_WIDTH
